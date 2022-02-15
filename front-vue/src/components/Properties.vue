@@ -5,18 +5,42 @@
                 <v-row justify="center">
                     <ul v-for="(list, index) in propertyList" :key="index">
                         <li>
-                            <v-btn @click="getProperty(list)">{{
-                                list.id
-                            }}</v-btn>
+                            <v-btn
+                                class="mb-5 mr-10"
+                                width="100%"
+                                height="100px"
+                                @click="getProperty(list)"
+                                >{{ list.id }}</v-btn
+                            >
                         </li>
+                        <li>家賃：{{ list.rent + "円" }}</li>
+                        <li>
+                            広さ：{{ list.size + "cm"
+                            }}<span class="small_unit">2</span>
+                        </li>
+                        <li>築年数：{{ list.age }}</li>
+                        <li>階：{{ list.floor }}</li>
+                        <p></p>
                     </ul>
                 </v-row>
                 <v-row justify="center">
                     <v-col style="text-align: center">
-                        <v-btn @click="registerPropaty">登録</v-btn>
+                        <v-btn
+                            color="blue-grey lighten-3"
+                            width="80%"
+                            height="50px"
+                            @click="registerPropaty"
+                            >登録</v-btn
+                        >
                     </v-col>
                     <v-col style="text-align: center">
-                        <v-btn @click="updatePropaty(1)">更新</v-btn>
+                        <v-btn
+                            color="blue-grey lighten-3"
+                            width="80%"
+                            height="50px"
+                            @click="updatePropaty(1)"
+                            >更新</v-btn
+                        >
                     </v-col>
                 </v-row>
             </v-container>
@@ -118,5 +142,10 @@ export default {
 <style scoped>
 ul {
     list-style: none;
+    margin: 5px 0;
+}
+.small_unit {
+    font-size: 2px;
+    vertical-align: top;
 }
 </style>
