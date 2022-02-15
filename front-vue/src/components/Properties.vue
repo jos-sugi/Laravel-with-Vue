@@ -2,6 +2,32 @@
     <v-app>
         <v-main>
             <v-container class="mt-15">
+                <v-row
+                    justify="center"
+                    v-if="Object.keys(this.selected).length !== 0"
+                >
+                    <v-card
+                        color="blue lighten-5"
+                        class="mb-5 mr-10"
+                        width="50%"
+                        height="500px"
+                    ></v-card>
+                </v-row>
+                <v-row
+                    justify="center"
+                    v-if="Object.keys(this.selected).length !== 0"
+                >
+                    <ul>
+                        <li>家賃：{{ selected.rent + "円" }}</li>
+                        <li>
+                            広さ：{{ selected.size + "cm"
+                            }}<span class="small_unit">2</span>
+                        </li>
+                        <li>築年数：{{ selected.age }}</li>
+                        <li>階：{{ selected.floor }}</li>
+                    </ul>
+                </v-row>
+
                 <v-row justify="center">
                     <ul v-for="(list, index) in propertyList" :key="index">
                         <li>
@@ -61,6 +87,8 @@ export default {
             rent: 70000,
             age: 3,
             floor: 5,
+            //選択物件
+            selected: [],
         };
     },
     created() {
@@ -76,7 +104,7 @@ export default {
             axios
                 .get(url)
                 .then((response) => {
-                    console.log(response);
+                    console.log(response.data);
                     this.propertyList = response.data;
                 })
                 .catch();
@@ -90,7 +118,7 @@ export default {
             axios
                 .get(url)
                 .then((response) => {
-                    console.log(response);
+                    this.selected = response.data;
                 })
                 .catch();
         },
@@ -111,6 +139,7 @@ export default {
                 })
                 .then((response) => {
                     console.log(response);
+                    console.log("新規登録", response.data);
                 })
                 .catch();
         },
@@ -132,6 +161,7 @@ export default {
                 })
                 .then((response) => {
                     console.log(response);
+                    console.log("更新", response.data);
                 })
                 .catch();
         },
