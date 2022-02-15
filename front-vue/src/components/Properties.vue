@@ -5,7 +5,9 @@
                 <v-row justify="center">
                     <ul v-for="(list, index) in propertyList" :key="index">
                         <li>
-                            <v-btn @click="getProperty(list)">{{ list }}</v-btn>
+                            <v-btn @click="getProperty(list)">{{
+                                list.id
+                            }}</v-btn>
                         </li>
                     </ul>
                 </v-row>
@@ -14,7 +16,7 @@
                         <v-btn @click="registerPropaty">登録</v-btn>
                     </v-col>
                     <v-col style="text-align: center">
-                        <v-btn @click="updatePropaty">更新</v-btn>
+                        <v-btn @click="updatePropaty(1)">更新</v-btn>
                     </v-col>
                 </v-row>
             </v-container>
@@ -28,18 +30,13 @@ export default {
     name: "App",
     data() {
         return {
-            name: "aaa",
-            commnet: "bbb",
-            // baseUrl:
-            //     "https://virtserver.swaggerhub.com/jos.sugi03/Property/1.0.0/",
-            baseUrl: "http://127.0.0.1:8000/api/",
             propertyList: [],
             //物件情報
             prorerty_id: "",
-            size: "",
-            rent: "",
-            age: "",
-            floor: "",
+            size: 33,
+            rent: 70000,
+            age: 3,
+            floor: 5,
         };
     },
     created() {
@@ -50,61 +47,69 @@ export default {
          * 物件一覧
          */
         getProperties() {
-            var url = this.baseUrl + "properties";
+            var url = "/api/" + "properties";
 
-            axios.get(url).then((response) => {
-                this.propertyList = response.data;
-                console.log(this.propertyList);
-            });
+            axios
+                .get(url)
+                .then((response) => {
+                    console.log(response);
+                    this.propertyList = response.data;
+                })
+                .catch();
         },
         /**
          * 物件詳細
          */
         getProperty(value) {
-            var url = this.baseUrl + "properties/" + value.prorerty_id;
+            var url = "/api/" + "properties/" + value.id;
 
-            axios.post(url).then((response) => {
-                console.log(response);
-            });
+            axios
+                .post(url)
+                .then((response) => {
+                    console.log(response);
+                })
+                .catch();
         },
         /**
          * 物件登録
          */
         registerPropaty() {
-            var url = this.baseUrl + "properties";
+            var url = "/api/" + "properties";
 
             axios
                 .post(url, {
-                    fields: {
+                    data: {
                         size: this.size,
                         rent: this.rent,
-                        age: this.rent,
+                        age: this.age,
                         floor: this.floor,
                     },
                 })
                 .then((response) => {
                     console.log(response);
-                });
+                })
+                .catch();
         },
         /**
          * 物件更新
          */
-        updatePropaty() {
-            var url = this.baseUrl + "properties";
+        updatePropaty(value) {
+            var url = "/api/" + "properties/update/" + value;
 
             axios
                 .post(url, {
-                    fields: {
+                    data: {
                         prorerty_id: this.property_id,
                         size: this.size,
                         rent: this.rent,
-                        age: this.rent,
+                        age: this.age,
                         floor: this.floor,
                     },
                 })
                 .then((response) => {
                     console.log(response);
-                });
+                })
+                .catch();
         },
     },
 };

@@ -9,65 +9,57 @@ use App\Property;
 class PropertyController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * 物件全件取得
      */
-    public function index()
+    public function properties()
     {
-        // return response()->json([
-        //     'vue-router' => 'https://router.vuejs.org/',
-        //     'vuex' => 'https://vuex.vuejs.org/',
-        //     'vue-devtools' => 'https://github.com/vuejs/vue-devtools#vue-devtools',
-        //     'vue-loader' => 'https://vue-loader.vuejs.org/',
-        //     'awesome-vue' => 'https://github.com/vuejs/awesome-vue'
-        // ]);
         $data =Property::all();
         return $data;
     }
-
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * 物件詳細取得
      */
-    public function store(Request $request)
+    public function detailProperty($id)
     {
-        //
+        $data =Property::find($id);
+        return $data;
     }
-
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * 物件登録
      */
-    public function show($id)
+    public function insertProperty(Request $request)
     {
-        //
+        $property = new Property;
+        $proparties = $request->data;
+
+        $property->size = $proparties["size"];
+        $property->rent = $proparties["rent"];
+        $property->age = $proparties["age"];
+        $property->floor = $proparties["floor"];
+        $property->save();
+
+        $property = Property::find($property->id);
+        return $property;
+
     }
-
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * 物件更新
      */
-    public function update(Request $request, $id)
+    public function updateProperty(Request $request, $id)
     {
-        //
-    }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+            $property = Property::findOrFail($id);
+            $proparties = $request->data;
+
+            $property->size = $proparties["size"];
+            $property->rent = $proparties["rent"];
+            $property->age = $proparties["age"];
+            $property->floor = $proparties["floor"];
+            $property->save();
+            $property = Property::find($id);
+
+            return $property;
+
+
     }
 }

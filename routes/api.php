@@ -19,10 +19,9 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::group(['middleware' => ['api']], function () {
-    Route::get('/properties', "API\PropertyController@index");
-    // Route::post('/properties', "API\PropertyController@index");
-    // Route::get('/properties/{propertey_id}', "API\PropertyController@index");
-    // Route::put('/properties/{propertey_id}', "API\PropertyController@index");
-
-    // Route::any('/properties', "API\SampleController@getProperties");
+    Route::get('/properties', "API\PropertyController@properties");
+    Route::post('/properties', "API\PropertyController@insertProperty");
+    
+    Route::post('/properties/{propertey_id}', "API\PropertyController@detailProperty");
+    Route::post('/properties/update/{propertey_id}', "API\PropertyController@updateProperty");
 });
