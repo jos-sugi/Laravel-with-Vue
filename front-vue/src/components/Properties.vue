@@ -24,15 +24,15 @@
 
 <script>
 import axios from "axios";
-
 export default {
     name: "App",
     data() {
         return {
             name: "aaa",
             commnet: "bbb",
-            baseUrl:
-                "https://virtserver.swaggerhub.com/jos.sugi03/Property/1.0.0/",
+            // baseUrl:
+            //     "https://virtserver.swaggerhub.com/jos.sugi03/Property/1.0.0/",
+            baseUrl: "http://127.0.0.1:8000/api/",
             propertyList: [],
             //物件情報
             prorerty_id: "",
