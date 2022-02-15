@@ -21,7 +21,6 @@ use Illuminate\Support\Facades\Route;
 Route::group(['middleware' => ['api']], function () {
     Route::get('/properties', "API\PropertyController@properties");
     Route::post('/properties', "API\PropertyController@insertProperty");
-    
-    Route::post('/properties/{propertey_id}', "API\PropertyController@detailProperty");
-    Route::post('/properties/update/{propertey_id}', "API\PropertyController@updateProperty");
+    Route::get('/properties/{propertey_id}', "API\PropertyController@detailProperty");
+    Route::post('/properties/{propertey_id}', "API\PropertyController@updateProperty");
 });

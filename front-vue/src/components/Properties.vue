@@ -64,7 +64,7 @@ export default {
             var url = "/api/" + "properties/" + value.id;
 
             axios
-                .post(url)
+                .get(url)
                 .then((response) => {
                     console.log(response);
                 })
@@ -94,7 +94,7 @@ export default {
          * 物件更新
          */
         updatePropaty(value) {
-            var url = "/api/" + "properties/update/" + value;
+            var url = "/api/" + "properties/" + value;
 
             axios
                 .post(url, {
