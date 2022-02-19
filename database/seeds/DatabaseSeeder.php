@@ -1,5 +1,4 @@
 <?php
-// namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -11,6 +10,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call('PropertySeeder::class');
+        $this->call(SampleSeeder::class);
+        // $this->call(UserSeeder::class);
+
     }
 }

@@ -1,10 +1,9 @@
 <?php
-namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Property;
 
-class PropertySeeder extends Seeder
+class SampleSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,11 +12,12 @@ class PropertySeeder extends Seeder
      */
     public function run()
     {
-        // Property::indert([
+        // Property::insert([
         //     'size' => 20,
         //     'rent' => 50000,
         //     'age' => 10,
         //     'floor' => 2,
         // ]);
+        factory(Property::class, 20)->create();
     }
 }

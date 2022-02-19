@@ -13,8 +13,26 @@ class PropertyController extends Controller
      */
     public function properties()
     {
-        $data =Property::all();
-        return $data;
+        try {
+            $data =Property::all();
+            return $data;
+        } catch (\Exception $e) {
+            $result = [
+                'result' => false,
+                'error' => [
+                    'messages' => [$e->getMessage()]
+                ],
+            ];
+            return $this->resConversionJson($result, $e->getCode());
+        }
+        return $this->resConversionJson($result);
+    }
+    private function resConversionJson($result, $statusCode=200)
+    {
+        if(empty($statusCode) || $statusCode < 100 || $statusCode >= 600){
+            $statusCode = 500;
+        }
+        return response()->json($result, $statusCode, ['Content-Type' => 'application/json'], JSON_UNESCAPED_SLASHES);
     }
     /**
      * 物件詳細取得
